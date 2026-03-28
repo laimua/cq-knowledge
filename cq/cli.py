@@ -1,4 +1,4 @@
-# CLI Entry Point
+﻿# CLI Entry Point
 
 """Command-line interface for Cq."""
 
@@ -30,14 +30,23 @@ console = Console()
 
 def get_db() -> Database:
     """Get or create database instance (sync wrapper)."""
-    import asyncio
-    return asyncio.run(get_database())
+    async def _get():
+        return await get_database()
+    return asyncio.run(_run_async(_get()))
 
 
 async def _init_db() -> Database:
     """Initialize database."""
     db = await get_database()
     return db
+
+
+async def _run_async(coro) -> None:
+    """Run an async coroutine and ensure cleanup."""
+    try:
+        await coro
+    finally:
+        await close_database()
 
 
 @app.command()
@@ -54,7 +63,7 @@ def init() -> None:
         db = await _init_db()
         console.print(f"[green]✓ Knowledge base initialized at {db.db_path}[/green]")
 
-    asyncio.run(_init())
+    asyncio.run(_run_async(_init()))
 
 
 @app.command()
@@ -90,7 +99,7 @@ def add(
         if tag_list:
             console.print(f"  Tags: {', '.join(tag_list)}")
 
-    asyncio.run(_add())
+    asyncio.run(_run_async(_add()))
 
 
 @app.command()
@@ -132,7 +141,7 @@ def list(
 
         console.print(table)
 
-    asyncio.run(_list())
+    asyncio.run(_run_async(_list()))
 
 
 @app.command()
@@ -171,7 +180,7 @@ def search(
                 border_style="blue" if ku.verified else "dim",
             ))
 
-    asyncio.run(_search())
+    asyncio.run(_run_async(_search()))
 
 
 @app.command()
@@ -214,7 +223,7 @@ def show(
             console.print(f"\n[dim]Feedback: {stats['helpful_count']} helpful, "
                         f"{stats['not_helpful_count']} not helpful[/dim]")
 
-    asyncio.run(_show())
+    asyncio.run(_run_async(_show()))
 
 
 @app.command()
@@ -252,7 +261,7 @@ def delete(
             console.print(f"[red]✗[/red] Failed to delete knowledge unit '{id}'")
             raise typer.Exit(1)
 
-    asyncio.run(_delete())
+    asyncio.run(_run_async(_delete()))
 
 
 @app.command()
@@ -314,7 +323,7 @@ def export(
         if include_feedback:
             console.print(f"  Included {len(export_data['feedback_history'])} feedback records")
 
-    asyncio.run(_export())
+    asyncio.run(_run_async(_export()))
 
 
 @app.command()
@@ -350,7 +359,7 @@ def feedback(
         if comment:
             console.print(f"  Comment: {comment}")
 
-    asyncio.run(_feedback())
+    asyncio.run(_run_async(_feedback()))
 
 
 @app.command()
@@ -427,7 +436,7 @@ def import_cmd(
             console.print(f"  Feedback: {feedback_count} records")
 
     # Use a different name to avoid conflict with import built-in
-    asyncio.run(_import())
+    asyncio.run(_run_async(_import()))
 
 
 @app.command()
@@ -518,7 +527,7 @@ def recalculate(
         else:
             console.print(f"\n[green]✓[/green] Updated confidence for {updated_count} knowledge unit(s)")
 
-    asyncio.run(_recalculate())
+    asyncio.run(_run_async(_recalculate()))
 
 
 @app.command()
