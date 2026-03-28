@@ -4,6 +4,7 @@
 
 import asyncio
 import json
+import sys
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
@@ -16,9 +17,14 @@ from rich.table import Table
 from cq import __version__
 from cq.core.models import Feedback, KnowledgeUnit, Source
 from cq.core.scoring import calculate_confidence
-from cq.core.storage import Database, get_database
+from cq.core.storage import Database, get_database, close_database
 from cq.repositories.feedback import FeedbackRepository
 from cq.repositories.knowledge import KnowledgeRepository
+
+# Fix GBK encoding on Windows - Rich uses Unicode chars (✓, ✗) that crash in GBK terminals
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 app = typer.Typer(
     name="cq",
