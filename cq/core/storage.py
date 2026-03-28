@@ -201,7 +201,7 @@ class Database:
         current_version = await self.get_version()
 
         # Get migration files
-        migrations_dir = Path(__file__).parent.parent.parent / "migrations"
+        migrations_dir = Path(__file__).parent.parent / "migrations"
         if not migrations_dir.exists():
             logger.warning("Migrations directory not found")
             return

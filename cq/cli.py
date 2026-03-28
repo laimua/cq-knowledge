@@ -546,17 +546,15 @@ def serve(
     import uvicorn
     from cq.api.app import create_app
 
-    async def start_server() -> None:
-        """Start the uvicorn server."""
-        app_instance = await create_app()
-        uvicorn.run(
-            app_instance,
-            host=host,
-            port=port,
-            reload=reload,
-        )
-
-    asyncio.run(start_server())
+    app_instance = asyncio.run(create_app())
+    config = uvicorn.Config(
+        app_instance,
+        host=host,
+        port=port,
+        reload=reload,
+    )
+    server = uvicorn.Server(config)
+    server.run()
 
 
 if __name__ == "__main__":

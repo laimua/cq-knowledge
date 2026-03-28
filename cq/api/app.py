@@ -19,8 +19,6 @@ async def create_app() -> FastAPI:
         title="Cq Knowledge API",
         description="Stack Overflow for AI Coding Agents - Web API",
         version="0.1.0",
-        docs_url="/api/docs",
-        redoc_url="/api/redoc",
     )
 
     # Configure CORS for local development
@@ -45,5 +43,12 @@ async def create_app() -> FastAPI:
     async def startup_event() -> None:
         """Initialize database on application startup."""
         await get_database()
+
+    # Shutdown event - close database connection
+    @app.on_event("shutdown")
+    async def shutdown_event() -> None:
+        """Close database on application shutdown."""
+        from cq.core.storage import close_database
+        await close_database()
 
     return app
