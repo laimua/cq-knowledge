@@ -60,6 +60,9 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.wheel]
 packages = ["cq"]
 
+[tool.hatch.build.targets.wheel.force-include]
+"migrations" = "cq/migrations"
+
 [tool.ruff]
 line-length = 100
 target-version = "py310"
