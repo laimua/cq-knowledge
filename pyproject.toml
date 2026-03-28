@@ -48,10 +48,10 @@ cq-knowledge = "cq.cli:app"
 cq-knowledge-mcp = "cq.mcp.server:main"
 
 [project.urls]
-Homepage = "https://github.com/xxx/cq"
-Documentation = "https://github.com/xxx/cq#readme"
-Repository = "https://github.com/xxx/cq"
-Issues = "https://github.com/xxx/cq/issues"
+Homepage = "https://github.com/laimua/cq-knowledge"
+Documentation = "https://github.com/laimua/cq-knowledge#readme"
+Repository = "https://github.com/laimua/cq-knowledge"
+Issues = "https://github.com/laimua/cq-knowledge/issues"
 
 [build-system]
 requires = ["hatchling"]

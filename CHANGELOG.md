@@ -125,8 +125,8 @@ cq-knowledge add --title "Your first knowledge" --problem "Problem" --solution "
 ```
 
 **Feedback Welcome!**
-Please report issues and suggestions on [GitHub Issues](https://github.com/yourusername/cq/issues).
+Please report issues and suggestions on [GitHub Issues](https://github.com/laimua/cq-knowledge/issues).
 
 ---
 
-[0.1.0]: https://github.com/yourusername/cq/releases/tag/v0.1.0
+[0.1.0]: https://github.com/laimua/cq-knowledge/releases/tag/v0.1.0

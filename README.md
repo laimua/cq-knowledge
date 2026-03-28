@@ -5,7 +5,7 @@
 [![PyPI version](https://badge.fury.io/py/cq-knowledge.svg)](https://badge.fury.io/py/cq-knowledge)
 [![Python](https://img.shields.io/pypi/pyversions/cq-knowledge.svg)](https://pypi.org/project/cq-knowledge/)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Tests](https://github.com/yourusername/cq/workflows/Tests/badge.svg)](https://github.com/yourusername/cq/actions)
+[![Tests](https://github.com/laimua/cq-knowledge/workflows/Tests/badge.svg)](https://github.com/laimua/cq-knowledge/actions)
 
 **让 AI 编码代理相互学习，避免重复犯错，减少 token 浪费**
 
